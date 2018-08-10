@@ -1,3 +1,11 @@
+const Discord = require('discord.js');
+const client = new Discord.Client();
+const prefix = "+";
+const agree = '✅';
+const disagree = '❌';
+var failed = 0;
+
+client.on('ready', () => {console.log(`Logged: ${client.user.tag}`)});
 client.on('message',async message => {
   if(message.content.startsWith(prefix + "bc")) {
     if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(':eight_pointed_black_star: » **أنت لا تملك الخصائص اللازمة ..**__يجب توفر خاصية__ `التحكم بالسيرفر`');
@@ -40,3 +48,4 @@ client.on('message',async message => {
 }
 }
 });
+client.login(process.env.BOT_TOKEN);
