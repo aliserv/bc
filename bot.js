@@ -15,7 +15,7 @@ client.on('message',async message => {
     var args = message.content.split(' ').slice(1).join(' ');
     if(!args) return message.channel.send(':eight_pointed_black_star: » **انت لم تقم بكتابة الرسالة**');
 
-    let msg = await message.channel.send(`\`• الرسالة :\`${args}\n\n**هل انت متأكد؟ لديك 5 ثواني للأختيار**`);
+    let msg = await message.channel.send(`\`• الرسالة :\`${args}\n\n**جارى الإرسال**`);
     await msg.react('🆗');
 
 
