@@ -9,7 +9,7 @@ client.on('ready', () => {
 console.log('omk ar3a');
 });
 
-client.on('message', message => {
+client.on('message',async message => {
   if(message.content.startsWith(prefix + "bc")) {
     if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(':eight_pointed_black_star: » **أنت لا تملك الخصائص اللازمة ..**__يجب توفر خاصية__ `التحكم بالسيرفر`');
     var args = message.content.split(' ').slice(1).join(' ');
