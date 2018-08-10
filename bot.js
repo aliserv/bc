@@ -1,15 +1,3 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const prefix = "+";
-const agree = '✅';
-const disagree = '❌';
-var failed = 0;
-
-client.on('ready', () => {
-  console.log(`Logged: ${client.user.tag}`);
-  console.log(`Developer: ${client.users.get('323885452207587329').username}`);
-});
-
 client.on('message',async message => {
   if(message.content.startsWith(prefix + "bc")) {
     if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(':eight_pointed_black_star: » **أنت لا تملك الخصائص اللازمة ..**__يجب توفر خاصية__ `التحكم بالسيرفر`');
@@ -48,7 +36,7 @@ client.on('message',async message => {
     bbb.on("collect", r => {
       message.channel.send(':eight_pointed_black_star: » تم الغاء الارسال');
     });
-    }
-  }
+  });
+}
+}
 });
-client.login(process.env.BOT_TOKEN);
