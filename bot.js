@@ -13,32 +13,35 @@ client.on('message',async message => {
     let msg = await message.channel.send(`\`• الرسالة :\`${args}\n\n**هل انت متأكد؟ لديك 5 ثواني للأختيار**`);
     await msg.react('✅');
     await msg.react('❌');
-    let re = await msg.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree && reaction.user === message.author.id, {time: 5000});
-    let a = re.get(agree).users.get(message.author.id);
-    let b = re.get(disagree).users.get(message.author.id);
+    
+    let aa = (reaction, user) => reaction.emoji.name === agree && user.id === msg.author.id;
+    let bb = (reaction, user) => reaction.emoji.name === disagree && user.id === message.author.id;
 
-    if(!a) return message.channel.send(':eight_pointed_black_star: » تم الغاء الارسال');
-    if(!b) return message.channel.send(':eight_pointed_black_star: » تم الغاء الارسال');
-    if(b) return message.channel.send(':eight_pointed_black_star: » تم الغاء الارسال');
+    let aaa  = message.createReactionCollector(aa, { time: 60000 });
+    let bbb  = message.createReactionCollector(bb, { time: 60000 });
 
-    if(a) {
-        message.channel.send(':information_source: » جاري ارسال الرسالة .. __يرجى الانتظار__');
-        setTimeout(() => {
-          var i = message.guild.memberCount - failed;
-          message.channel.send(`:white_check_mark: » تم ارسال البرودكاست .. تم الارسال لـ ${i} شخص`);
-        }, message.guild.memberCount * 1000);
-        message.guild.members.forEach(m => {
-          args = args.replace('[sender]', message.author);
-          args = args.replace('[server]', message.guild.name);
-          var bcEmbeed = new Discord.RichEmbed()
-          .setAuthor(message.author.username, message.author.avatarURL)
-          .addField(':eight_pointed_black_star: » السيرفر', `[** __${message.guild.name}__ **]`,true)
-          .addField(':eight_pointed_black_star: » المرسل', `[** __${message.author.username}__ **]`,true)
-          .addField(':eight_pointed_black_star: » الرسالة', args.replace('[user]' , m))
-          .setFooter(`${client.user.username} :: ${new Date().toLocaleString()}`, client.user.avatarURL)
-          .setColor('BLACK');
-          m.send(bcEmbeed).catch(e => failed++);
-        });
+    aaa.on("collect", r => {
+      message.channel.send(':information_source: » جاري ارسال الرسالة .. __يرجى الانتظار__');
+      setTimeout(() => {
+        var i = message.guild.memberCount - failed;
+        message.channel.send(`:white_check_mark: » تم ارسال البرودكاست .. تم الارسال لـ ${i} شخص`);
+      }, message.guild.memberCount * 1000);
+      message.guild.members.forEach(m => {
+        args = args.replace('[sender]', message.author);
+        args = args.replace('[server]', message.guild.name);
+        var bcEmbeed = new Discord.RichEmbed()
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .addField(':eight_pointed_black_star: » السيرفر', `[** __${message.guild.name}__ **]`,true)
+        .addField(':eight_pointed_black_star: » المرسل', `[** __${message.author.username}__ **]`,true)
+        .addField(':eight_pointed_black_star: » الرسالة', args.replace('[user]' , m))
+        .setFooter(`${client.user.username} :: ${new Date().toLocaleString()}`, client.user.avatarURL)
+        .setColor('BLACK');
+        m.send(bcEmbeed).catch(e => failed++);
+    });
+
+    bbb.on("collect", r => {
+      message.channel.send(':eight_pointed_black_star: » تم الغاء الارسال');
+    });
     }
   }
 });
