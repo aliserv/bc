@@ -16,16 +16,9 @@ client.on('message',async message => {
     if(!args) return message.channel.send(':eight_pointed_black_star: » **انت لم تقم بكتابة الرسالة**');
 
     let msg = await message.channel.send(`\`• الرسالة :\`${args}\n\n**هل انت متأكد؟ لديك 5 ثواني للأختيار**`);
-    await msg.react('✅');
-    await msg.react('❌');
+    await msg.react('🆗');
 
-    let aa = (reaction, user) => reaction.emoji.name === agree && user.id === msg.author.id;
-    let bb = (reaction, user) => reaction.emoji.name === disagree && user.id === message.author.id;
 
-    let aaa  = message.createReactionCollector(aa, { time: 5000 });
-    let bbb  = message.createReactionCollector(bb, { time: 5000 });
-
-    aaa.on("collect", r => {
       message.channel.send(':information_source: » جاري ارسال الرسالة .. __يرجى الانتظار__');
       setTimeout(() => {
         var i = message.guild.memberCount - failed;
@@ -45,11 +38,6 @@ client.on('message',async message => {
         .setColor('BLACK');
         m.send(bcEmbeed).catch(e => failed++);
     });
-  });
-
-  bbb.on("collect", r => {
-    message.channel.send(':eight_pointed_black_star: » تم الغاء الارسال');
-  });
   }
 });
 
