@@ -5,9 +5,7 @@ const agree = '✅';
 const disagree = '❌';
 var failed = 0;
 
-client.on('ready', () => {
-  console.log(`Logged: ${client.user.tag}`);
-});
+client.on('ready', () => {console.log(`Logged: ${client.user.tag}`)});
 client.on('message',async message => {
   if(message.content.startsWith(prefix + "bc")) {
     if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(':eight_pointed_black_star: » **أنت لا تملك الخصائص اللازمة ..**__يجب توفر خاصية__ `التحكم بالسيرفر`');
@@ -21,8 +19,8 @@ client.on('message',async message => {
     let aa = (reaction, user) => reaction.emoji.name === agree && user.id === msg.author.id;
     let bb = (reaction, user) => reaction.emoji.name === disagree && user.id === message.author.id;
 
-    let aaa  = message.createReactionCollector(aa, { time: 60000 });
-    let bbb  = message.createReactionCollector(bb, { time: 60000 });
+    let aaa  = message.createReactionCollector(aa, { time: 5000 });
+    let bbb  = message.createReactionCollector(bb, { time: 5000 });
 
     aaa.on("collect", r => {
       message.channel.send(':information_source: » جاري ارسال الرسالة .. __يرجى الانتظار__');
