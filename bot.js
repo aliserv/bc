@@ -6,7 +6,7 @@ const disagree = '❌';
 var failed = 0;
 
 client.on('ready', () => {
-console.log('omk ar3a');
+console.log('Foil');
 });
 
 client.on('message',async message => {
