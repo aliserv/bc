@@ -1,3 +1,19 @@
+const Discord = require('discord.js');
+const fs = require('fs')
+const client = new Discord.Client();
+
+const prefix = '';
+
+client.on('ready', () => {
+
+    console.log(`Logged in as [ !                Vida]`);
+
+});
+
+
+
+
+
 client.on('message', message => {
     if (message.author.id === client.user.id) return;
     if (message.guild) {
