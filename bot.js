@@ -6,7 +6,7 @@ const prefix = '';
 
 client.on('ready', () => {
 
-    console.log(`Logged in as [stylight]`);
+    console.log(`Logged in as [Vida]`);
 
 });
 
